@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://conanan.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://conanan.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 14:04:03 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>draw wrl with vtk</title><link>https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</link><description># point
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://conanan.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://conanan.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 14:09:06 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>draw wrl with vtk</title><link>https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</link><description># point
 ```
 import vtk
 import re
@@ -147,7 +147,7 @@ else:
 
 # lines
 
-`import re
+```import re
 import numpy as np
 import json
 from pathlib import Path
@@ -383,9 +383,9 @@ if __name__ == '__main__':
         print(f'✅ 共解析到 {len(parsed_data)} 个FilamentSegment')
         export_first_segment_features(parsed_data)
     else:
-        print('❌ 解析失败：未找到符合要求的FilamentSegment结构！')`
+        print('❌ 解析失败：未找到符合要求的FilamentSegment结构！')```
 # faces
-`import vtk
+```import vtk
 import re
 import numpy as np
 
@@ -553,7 +553,7 @@ if __name__ == '__main__':
         total_points = sum(len(seg['points']) for seg in parsed_data)
         print(f'✅ 成功解析 {total_segments} 个神经细丝段，{total_points} 个顶点，{total_faces} 个面，启动VTK面可视化...')
         # 2. VTK绘制面（无其他功能）
-        vtk_face_visualization(parsed_data)`。</description><guid isPermaLink="true">https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</guid><pubDate>Wed, 26 Nov 2025 14:03:31 +0000</pubDate></item><item><title>test</title><link>https://conanan.github.io/post/test.html</link><description>test。</description><guid isPermaLink="true">https://conanan.github.io/post/test.html</guid><pubDate>Wed, 26 Nov 2025 09:33:25 +0000</pubDate></item><item><title>Imaris wrl struct for dendrite annotaion</title><link>https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</link><description>
+        vtk_face_visualization(parsed_data)```。</description><guid isPermaLink="true">https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</guid><pubDate>Wed, 26 Nov 2025 14:03:31 +0000</pubDate></item><item><title>test</title><link>https://conanan.github.io/post/test.html</link><description>test。</description><guid isPermaLink="true">https://conanan.github.io/post/test.html</guid><pubDate>Wed, 26 Nov 2025 09:33:25 +0000</pubDate></item><item><title>Imaris wrl struct for dendrite annotaion</title><link>https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</link><description>
 ***
 
 ## **Annotated WRL Structure for FilamentSegment510000000001**
