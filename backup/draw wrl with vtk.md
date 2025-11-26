@@ -1,19 +1,18 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://conanan.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://conanan.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 14:04:03 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>draw wrl with vtk</title><link>https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</link><description># point
+# point
 ```
 import vtk
 import re
 import numpy as np
 
 # -------------------------- 配置参数（新增点大小设置） --------------------------
-VRML_FILE_PATH = r'C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl'
+VRML_FILE_PATH = r"C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl"
 POINT_SIZE = 5.0  # 顶点大小（可调整，越大越清晰）
 BACKGROUND_COLOR = (1.0, 1.0, 1.0)  # 白色背景
 
 # -------------------------- 核心工具：解析逻辑不变（仍提取顶点数据） --------------------------
 def parse_vrml_manual(vrml_path):
-    '''手动解析VRML，提取顶点、颜色等数据（解析逻辑不变）'''
-    with open(vrml_path, 'r', encoding='utf-8') as f:
+    """手动解析VRML，提取顶点、颜色等数据（解析逻辑不变）"""
+    with open(vrml_path, "r", encoding="utf-8") as f:
         content = f.read()
     
     # 正则匹配核心数据（FilamentSegment → 颜色 → 顶点 → 索引）
@@ -26,7 +25,7 @@ def parse_vrml_manual(vrml_path):
     matches = re.findall(pattern, content, re.DOTALL | re.VERBOSE)
     
     if not matches:
-        print('⚠️  未匹配到FilamentSegment数据，尝试简化匹配规则...')
+        print("⚠️  未匹配到FilamentSegment数据，尝试简化匹配规则...")
         pattern_simple = r'DEF\s+(FilamentSegment\d+)\s+Group\s*\{\s*.*?diffuseColor\s+(\S+)\s+(\S+)\s+(\S+)\s*.*?point\s*\[\s*(.*?)\s*\]'
         matches = re.findall(pattern_simple, content, re.DOTALL)
     
@@ -37,13 +36,13 @@ def parse_vrml_manual(vrml_path):
             seg_id, r, g, b, point_str, coord_idx_str = match
         else:
             seg_id, r, g, b, point_str = match
-            coord_idx_str = ''
+            coord_idx_str = ""
         
         # 解析颜色（转为VTK所需的0-255整数）
         r, g, b = float(r), float(g), float(b)
-        if r &gt; 0.7 and g &lt; 0.1 and b &gt; 0.7:
+        if r > 0.7 and g < 0.1 and b > 0.7:
             rgb = (192, 0, 192)  # 树突（紫色）
-        elif r &gt; 0.9 and g &lt; 0.1 and b &lt; 0.1:
+        elif r > 0.9 and g < 0.1 and b < 0.1:
             rgb = (255, 0, 0)    # 脊柱（红色）
         else:
             rgb = (128, 128, 128)  # 其他结构（灰色）
@@ -53,29 +52,29 @@ def parse_vrml_manual(vrml_path):
         points = np.array(points, dtype=np.float64).reshape(-1, 3) if points else np.array([])
         
         # 仅保留有顶点的数据（至少1个顶点即可）
-        if len(points) &gt;= 1:
+        if len(points) >= 1:
             parsed_data.append({
-                'seg_id': seg_id,
-                'rgb': rgb,
-                'points': points
+                "seg_id": seg_id,
+                "rgb": rgb,
+                "points": points
             })
     
     return parsed_data
 
 # -------------------------- 核心逻辑：仅渲染顶点（不连接线段） --------------------------
 def vtk_render_points_only(parsed_data):
-    '''纯顶点渲染，不构建任何线段'''
+    """纯顶点渲染，不构建任何线段"""
     vtk_poly_data = vtk.vtkPolyData()
     vtk_points = vtk.vtkPoints()
     vtk_vertices = vtk.vtkCellArray()  # 用于存储顶点（替换原来的vtkLines）
     color_map = vtk.vtkUnsignedCharArray()
     color_map.SetNumberOfComponents(3)
-    color_map.SetName('Colors')
+    color_map.SetName("Colors")
 
     # 遍历解析数据，添加所有顶点（不处理连接关系）
     for seg in parsed_data:
-        points = seg['points']
-        rgb = seg['rgb']
+        points = seg["points"]
+        rgb = seg["rgb"]
 
         # 逐个添加顶点和对应的颜色
         for x, y, z in points:
@@ -110,7 +109,7 @@ def vtk_render_points_only(parsed_data):
 
     # 窗口配置
     render_window = vtk.vtkRenderWindow()
-    render_window.SetWindowName('神经细丝顶点可视化（仅显示点）')
+    render_window.SetWindowName("神经细丝顶点可视化（仅显示点）")
     render_window.SetSize(1200, 900)
     render_window.AddRenderer(renderer)
 
@@ -121,24 +120,24 @@ def vtk_render_points_only(parsed_data):
     # 启动可视化
     interactor.Initialize()
     render_window.Render()
-    print('🖱️  交互指南：')
-    print('   - 左键拖拽：旋转场景')
-    print('   - 滚轮：缩放画面')
-    print('   - 右键拖拽：平移场景')
-    print('   - 按 'q' 键关闭窗口')
+    print("🖱️  交互指南：")
+    print("   - 左键拖拽：旋转场景")
+    print("   - 滚轮：缩放画面")
+    print("   - 右键拖拽：平移场景")
+    print("   - 按 'q' 键关闭窗口")
     interactor.Start()
 
 # -------------------------- 主执行流程 --------------------------
 # 1. 解析VRML（提取顶点数据）
-print('📥 正在解析VRML文件...')
+print("📥 正在解析VRML文件...")
 parsed_data = parse_vrml_manual(VRML_FILE_PATH)
 
 if not parsed_data:
-    print('❌ 未提取到有效顶点数据！')
+    print("❌ 未提取到有效顶点数据！")
 else:
     # 统计总顶点数
-    total_points = sum(len(seg['points']) for seg in parsed_data)
-    print(f'✅ 成功解析 {len(parsed_data)} 个线段，共 {total_points} 个顶点，启动顶点可视化...')
+    total_points = sum(len(seg["points"]) for seg in parsed_data)
+    print(f"✅ 成功解析 {len(parsed_data)} 个线段，共 {total_points} 个顶点，启动顶点可视化...")
     # 2. 仅渲染顶点
     vtk_render_points_only(parsed_data)
 ```
@@ -154,14 +153,14 @@ from pathlib import Path
 import os
 
 # -------------------------- 配置参数 --------------------------
-VRML_FILE_PATH = r'C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl'
-EXPORT_FORMAT = 'json'  # 导出格式：'json'（推荐，保留结构）或 'txt'（易读）
+VRML_FILE_PATH = r"C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl"
+EXPORT_FORMAT = "json"  # 导出格式："json"（推荐，保留结构）或 "txt"（易读）
 DEFAULT_COLOR = (128, 128, 128)  # 无diffuseColor时的默认颜色
 
 # -------------------------- 核心解析函数（保留所有特征） --------------------------
 def parse_vrml_manual(vrml_path):
-    '''解析VRML，提取所有FilamentSegment的完整特征（适配IndexedFaceSet结构）'''
-    with open(vrml_path, 'r', encoding='utf-8') as f:
+    """解析VRML，提取所有FilamentSegment的完整特征（适配IndexedFaceSet结构）"""
+    with open(vrml_path, "r", encoding="utf-8") as f:
         content = f.read()
     
     # 精准匹配：FilamentSegment → diffuseColor → IndexedFaceSet → Coordinate(point) + coordIndex
@@ -203,23 +202,23 @@ def parse_vrml_manual(vrml_path):
          creaseAngle_block, creaseAngle_val) = match
         
         # 1. 基础信息（FilamentSegment ID）
-        seg_id = re.search(r'FilamentSegment\d+', match[0]).group() if match[0] else 'Unknown_Segment'
+        seg_id = re.search(r'FilamentSegment\d+', match[0]).group() if match[0] else "Unknown_Segment"
         
         # 2. 颜色信息
         if diffuseColor_block:
             r, g, b = float(r), float(g), float(b)
             rgb_255 = (int(r*255), int(g*255), int(b*255))
             # 结构类型分类
-            if r &gt; 0.7 and g &lt; 0.1 and b &gt; 0.7:
-                color_desc = '树突（紫色）'
-            elif r &gt; 0.9 and g &lt; 0.1 and b &lt; 0.1:
-                color_desc = '脊柱（红色）'
+            if r > 0.7 and g < 0.1 and b > 0.7:
+                color_desc = "树突（紫色）"
+            elif r > 0.9 and g < 0.1 and b < 0.1:
+                color_desc = "脊柱（红色）"
             else:
-                color_desc = '其他结构'
+                color_desc = "其他结构"
         else:
             rgb_255 = DEFAULT_COLOR
             r, g, b = [c/255 for c in DEFAULT_COLOR]
-            color_desc = '无颜色信息'
+            color_desc = "无颜色信息"
         
         # 3. 顶点坐标（Coordinate → point）
         points_raw = re.findall(r'[-+]?\d+\.?\d*e?[-+]?\d*', point_str)
@@ -239,14 +238,14 @@ def parse_vrml_manual(vrml_path):
             for group in idx_groups:
                 if group.strip():
                     face_indices = [int(x) for x in group.split()]
-                    if len(set(face_indices)) &gt;= 3:  # 过滤无效面
+                    if len(set(face_indices)) >= 3:  # 过滤无效面
                         coord_idx_groups.append(face_indices)
         face_count = len(coord_idx_groups)
         
         # 6. 其他IndexedFaceSet参数
-        ccw = ccw_val.lower() if ccw_val else 'true'  # 默认true
-        solid = solid_val.lower() if solid_val else 'false'  # 默认false
-        convex = convex_val.lower() if convex_val else 'true'  # 默认true
+        ccw = ccw_val.lower() if ccw_val else "true"  # 默认true
+        solid = solid_val.lower() if solid_val else "false"  # 默认false
+        convex = convex_val.lower() if convex_val else "true"  # 默认true
         crease_angle = float(creaseAngle_val) if creaseAngle_val else 0.0
         
         # 7. normalIndex（可选）
@@ -259,34 +258,34 @@ def parse_vrml_manual(vrml_path):
         
         # 整理所有特征
         parsed_data.append({
-            '基础信息': {
-                'FilamentSegment ID': seg_id,
-                '结构类型': color_desc,
-                '顶点总数': vertex_count,
-                '有效面总数': face_count
+            "基础信息": {
+                "FilamentSegment ID": seg_id,
+                "结构类型": color_desc,
+                "顶点总数": vertex_count,
+                "有效面总数": face_count
             },
-            '颜色信息': {
-                '原始RGB(0-1)': (round(r, 6), round(g, 6), round(b, 6)),
-                '标准化RGB(0-255)': rgb_255,
-                '颜色描述': color_desc
+            "颜色信息": {
+                "原始RGB(0-1)": (round(r, 6), round(g, 6), round(b, 6)),
+                "标准化RGB(0-255)": rgb_255,
+                "颜色描述": color_desc
             },
-            'Coordinate节点': {
-                'DEF ID': coord_def_id,
-                '顶点坐标(point)': points.tolist(),  # 转为list方便导出
-                '顶点总数': vertex_count
+            "Coordinate节点": {
+                "DEF ID": coord_def_id,
+                "顶点坐标(point)": points.tolist(),  # 转为list方便导出
+                "顶点总数": vertex_count
             },
-            'Normal节点': {
-                'DEF ID': normal_def_id if normal_def_id else '无',
-                '法向量(vector)': normal_vector,
-                '是否存在法向量': bool(normal_block)
+            "Normal节点": {
+                "DEF ID": normal_def_id if normal_def_id else "无",
+                "法向量(vector)": normal_vector,
+                "是否存在法向量": bool(normal_block)
             },
-            'IndexedFaceSet参数': {
-                'coordIndex（面索引组）': coord_idx_groups,
-                'normalIndex（法向量索引组）': normal_idx_groups if normal_idx_groups else '无',
-                'ccw（逆时针排序）': ccw,
-                'solid（是否为实心）': solid,
-                'convex（是否凸多边形）': convex,
-                'creaseAngle（折痕角度）': round(crease_angle, 6)
+            "IndexedFaceSet参数": {
+                "coordIndex（面索引组）": coord_idx_groups,
+                "normalIndex（法向量索引组）": normal_idx_groups if normal_idx_groups else "无",
+                "ccw（逆时针排序）": ccw,
+                "solid（是否为实心）": solid,
+                "convex（是否凸多边形）": convex,
+                "creaseAngle（折痕角度）": round(crease_angle, 6)
             }
         })
     
@@ -294,26 +293,26 @@ def parse_vrml_manual(vrml_path):
 
 # -------------------------- 工具函数：截断长参数显示 --------------------------
 def truncate_long_data(data, max_lines=3):
-    '''长列表/数组显示时仅保留前max_lines行，结尾标注总数'''
+    """长列表/数组显示时仅保留前max_lines行，结尾标注总数"""
     if isinstance(data, list):
         # 处理顶点坐标（每个元素是[x,y,z]）
         if len(data) == 0:
-            return '无'
-        elif len(data) &lt;= max_lines:
-            return [f'[{round(x, 6)}, {round(y, 6)}, {round(z, 6)}]' for x, y, z in data]
+            return "无"
+        elif len(data) <= max_lines:
+            return [f"[{round(x, 6)}, {round(y, 6)}, {round(z, 6)}]" for x, y, z in data]
         else:
-            truncated = [f'[{round(x, 6)}, {round(y, 6)}, {round(z, 6)}]' for x, y, z in data[:max_lines]]
-            truncated.append(f'...（共{len(data)}个顶点）')
+            truncated = [f"[{round(x, 6)}, {round(y, 6)}, {round(z, 6)}]" for x, y, z in data[:max_lines]]
+            truncated.append(f"...（共{len(data)}个顶点）")
             return truncated
     elif isinstance(data, list) and all(isinstance(item, list) for item in data):
         # 处理索引组（如coordIndex_groups）
         if len(data) == 0:
-            return '无'
-        elif len(data) &lt;= max_lines:
+            return "无"
+        elif len(data) <= max_lines:
             return [str(group) for group in data]
         else:
             truncated = [str(group) for group in data[:max_lines]]
-            truncated.append(f'...（共{len(data)}个面索引组）')
+            truncated.append(f"...（共{len(data)}个面索引组）")
             return truncated
     else:
         return data
@@ -321,76 +320,76 @@ def truncate_long_data(data, max_lines=3):
 # -------------------------- 核心功能：导出第一个FilamentSegment --------------------------
 def export_first_segment_features(parsed_data):
     if not parsed_data:
-        print('❌ 未解析到任何FilamentSegment数据！')
+        print("❌ 未解析到任何FilamentSegment数据！")
         return
     
     # 仅取第一个FilamentSegment
     first_seg = parsed_data[0]
-    seg_id = first_seg['基础信息']['FilamentSegment ID']
-    print(f'🎉 开始导出第一个FilamentSegment特征：{seg_id}\n')
+    seg_id = first_seg["基础信息"]["FilamentSegment ID"]
+    print(f"🎉 开始导出第一个FilamentSegment特征：{seg_id}\n")
 
     # -------------------------- 1. 控制台打印（简化长参数） --------------------------
-    print('='*60)
-    print('📋 第一个FilamentSegment完整特征（长参数仅显示前3行）')
-    print('='*60)
+    print("="*60)
+    print("📋 第一个FilamentSegment完整特征（长参数仅显示前3行）")
+    print("="*60)
     
     for category, features in first_seg.items():
-        print(f'\n【{category}】')
+        print(f"\n【{category}】")
         for key, value in features.items():
             # 对长参数进行截断显示
-            if key in ['顶点坐标(point)', 'coordIndex（面索引组）']:
+            if key in ["顶点坐标(point)", "coordIndex（面索引组）"]:
                 truncated_val = truncate_long_data(value)
                 if isinstance(truncated_val, list):
-                    print(f'  {key}:')
+                    print(f"  {key}:")
                     for line in truncated_val:
-                        print(f'    - {line}')
+                        print(f"    - {line}")
                 else:
-                    print(f'  {key}: {truncated_val}')
+                    print(f"  {key}: {truncated_val}")
             else:
-                print(f'  {key}: {value}')
+                print(f"  {key}: {value}")
     
     # -------------------------- 2. 导出完整数据到文件 --------------------------
     # 生成导出路径
     vrml_dir = os.path.dirname(VRML_FILE_PATH)
     vrml_filename = Path(VRML_FILE_PATH).stem
-    export_filename = f'{vrml_filename}_第一个FilamentSegment_完整特征.{EXPORT_FORMAT}'
+    export_filename = f"{vrml_filename}_第一个FilamentSegment_完整特征.{EXPORT_FORMAT}"
     export_path = os.path.join(vrml_dir, export_filename)
     
     # 导出为JSON（保留完整结构）或TXT（易读）
-    if EXPORT_FORMAT == 'json':
+    if EXPORT_FORMAT == "json":
         # 转换numpy数组为list（JSON不支持numpy类型）
-        with open(export_path, 'w', encoding='utf-8') as f:
+        with open(export_path, "w", encoding="utf-8") as f:
             json.dump(first_seg, f, ensure_ascii=False, indent=2)
-    elif EXPORT_FORMAT == 'txt':
-        with open(export_path, 'w', encoding='utf-8') as f:
-            f.write(f'第一个FilamentSegment完整特征 - {seg_id}\n')
-            f.write('='*80 + '\n\n')
+    elif EXPORT_FORMAT == "txt":
+        with open(export_path, "w", encoding="utf-8") as f:
+            f.write(f"第一个FilamentSegment完整特征 - {seg_id}\n")
+            f.write("="*80 + "\n\n")
             for category, features in first_seg.items():
-                f.write(f'【{category}】\n')
+                f.write(f"【{category}】\n")
                 for key, value in features.items():
-                    f.write(f'  {key}: {value}\n')
-                f.write('\n')
+                    f.write(f"  {key}: {value}\n")
+                f.write("\n")
     
-    print(f'\n📁 完整特征已导出至：{export_path}')
-    print(f'💡 导出格式：{EXPORT_FORMAT}（含未截断的完整数据）')
+    print(f"\n📁 完整特征已导出至：{export_path}")
+    print(f"💡 导出格式：{EXPORT_FORMAT}（含未截断的完整数据）")
 
 # -------------------------- 主函数 --------------------------
-if __name__ == '__main__':
-    print('📥 正在解析VRML文件...')
+if __name__ == "__main__":
+    print("📥 正在解析VRML文件...")
     parsed_data = parse_vrml_manual(VRML_FILE_PATH)
     
     if parsed_data:
-        print(f'✅ 共解析到 {len(parsed_data)} 个FilamentSegment')
+        print(f"✅ 共解析到 {len(parsed_data)} 个FilamentSegment")
         export_first_segment_features(parsed_data)
     else:
-        print('❌ 解析失败：未找到符合要求的FilamentSegment结构！')`
+        print("❌ 解析失败：未找到符合要求的FilamentSegment结构！")`
 # faces
 `import vtk
 import re
 import numpy as np
 
 # -------------------------- 配置参数（适配面渲染，保留核心项） --------------------------
-VRML_FILE_PATH = r'C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl'
+VRML_FILE_PATH = r"C:\Users\liuj2\Desktop\10_PDGF x GFP-M#170_Control RH_01x.wrl"
 FACE_OPACITY = 0.7  # 面透明度（0=透明，1=不透明）
 EDGE_WIDTH = 1.0    # 面边缘宽度（突出面边界）
 EDGE_COLOR = (0.0, 0.0, 0.0)  # 面边缘颜色（黑色）
@@ -398,8 +397,8 @@ BACKGROUND_COLOR = (1.0, 1.0, 1.0)  # 白色背景
 
 # -------------------------- 核心工具：解析coordIndex并保留-1作为面分隔符 --------------------------
 def parse_vrml_manual(vrml_path):
-    '''手动解析VRML，保留coordIndex中的-1，提取面数据（ID、颜色、顶点、面索引组）'''
-    with open(vrml_path, 'r', encoding='utf-8') as f:
+    """手动解析VRML，保留coordIndex中的-1，提取面数据（ID、颜色、顶点、面索引组）"""
+    with open(vrml_path, "r", encoding="utf-8") as f:
         content = f.read()
     
     # 正则匹配核心数据（FilamentSegment → 颜色 → 顶点 → 带-1的coordIndex）
@@ -412,7 +411,7 @@ def parse_vrml_manual(vrml_path):
     matches = re.findall(pattern, content, re.DOTALL | re.VERBOSE)
     
     if not matches:
-        print('⚠️  未匹配到FilamentSegment数据，尝试简化匹配规则...')
+        print("⚠️  未匹配到FilamentSegment数据，尝试简化匹配规则...")
         pattern_simple = r'DEF\s+(FilamentSegment\d+)\s+Group\s*\{\s*.*?diffuseColor\s+(\S+)\s+(\S+)\s+(\S+)\s*.*?point\s*\[\s*(.*?)\s*\]'
         matches = re.findall(pattern_simple, content, re.DOTALL)
     
@@ -423,13 +422,13 @@ def parse_vrml_manual(vrml_path):
             seg_id, r, g, b, point_str, coord_idx_str = match
         else:
             seg_id, r, g, b, point_str = match
-            coord_idx_str = ''
+            coord_idx_str = ""
         
         # 解析颜色（转为VTK所需的0-255整数）
         r, g, b = float(r), float(g), float(b)
-        if r &gt; 0.7 and g &lt; 0.1 and b &gt; 0.7:
+        if r > 0.7 and g < 0.1 and b > 0.7:
             rgb = (192, 0, 192)  # 树突（紫色）
-        elif r &gt; 0.9 and g &lt; 0.1 and b &lt; 0.1:
+        elif r > 0.9 and g < 0.1 and b < 0.1:
             rgb = (255, 0, 0)    # 脊柱（红色）
         else:
             rgb = (128, 128, 128)  # 其他结构（灰色）
@@ -441,7 +440,7 @@ def parse_vrml_manual(vrml_path):
         # -------------------------- 关键修改：保留-1，按-1分割面索引 --------------------------
         face_groups = []
         if coord_idx_str.strip():
-            # 步骤1：移除逗号（处理'0,1,18,17,-1' → '0 1 18 17 -1'）
+            # 步骤1：移除逗号（处理"0,1,18,17,-1" → "0 1 18 17 -1"）
             coord_idx_str_clean = coord_idx_str.replace(',', '').strip()
             # 步骤2：按-1分割，得到每个面的索引组（保留-1作为分隔符，分割后丢弃-1）
             idx_groups = re.split(r'-1\s*', coord_idx_str_clean)
@@ -449,35 +448,35 @@ def parse_vrml_manual(vrml_path):
             for group in idx_groups:
                 if group.strip():
                     face_indices = [int(x) for x in group.split()]
-                    if len(face_indices) &gt;= 3:  # 面至少需要3个顶点
+                    if len(face_indices) >= 3:  # 面至少需要3个顶点
                         face_groups.append(face_indices)
         
         # 仅保留有效数据（至少3个顶点 + 至少1个有效面）
-        if len(points) &gt;= 3 and len(face_groups) &gt;= 1:
+        if len(points) >= 3 and len(face_groups) >= 1:
             parsed_data.append({
-                'seg_id': seg_id,
-                'rgb': rgb,
-                'points': points,
-                'face_groups': face_groups  # 存储按-1分割后的面索引组
+                "seg_id": seg_id,
+                "rgb": rgb,
+                "points": points,
+                "face_groups": face_groups  # 存储按-1分割后的面索引组
             })
     
     return parsed_data
 
 # -------------------------- 核心逻辑：VTK绘制面（face）而非线（line） --------------------------
 def vtk_face_visualization(parsed_data):
-    '''用VTK绘制3D面，保留面边缘，无冗余功能'''
+    """用VTK绘制3D面，保留面边缘，无冗余功能"""
     vtk_poly_data = vtk.vtkPolyData()
     vtk_points = vtk.vtkPoints()
     vtk_faces = vtk.vtkCellArray()  # 存储面（替换原vtkLines）
     color_map = vtk.vtkUnsignedCharArray()
     color_map.SetNumberOfComponents(3)
-    color_map.SetName('Colors')
+    color_map.SetName("Colors")
 
     # 遍历解析数据，构建VTK顶点和面
     for seg in parsed_data:
-        points = seg['points']
-        face_groups = seg['face_groups']  # 按-1分割后的面索引组
-        rgb = seg['rgb']
+        points = seg["points"]
+        face_groups = seg["face_groups"]  # 按-1分割后的面索引组
+        rgb = seg["rgb"]
 
         # 添加顶点和颜色（与原逻辑一致）
         start_point_id = vtk_points.GetNumberOfPoints()
@@ -522,7 +521,7 @@ def vtk_face_visualization(parsed_data):
     renderer.ResetCamera()  # 自动适配所有面
 
     render_window = vtk.vtkRenderWindow()
-    render_window.SetWindowName('神经细丝VTK面可视化')
+    render_window.SetWindowName("神经细丝VTK面可视化")
     render_window.SetSize(1200, 900)
     render_window.AddRenderer(renderer)
 
@@ -532,173 +531,25 @@ def vtk_face_visualization(parsed_data):
     # 启动可视化交互（与原逻辑一致）
     interactor.Initialize()
     render_window.Render()
-    print('🖱️  交互指南：')
-    print('   - 左键拖拽：旋转场景')
-    print('   - 滚轮：缩放画面')
-    print('   - 右键拖拽：平移场景')
-    print('   - 按 'q' 键关闭窗口')
+    print("🖱️  交互指南：")
+    print("   - 左键拖拽：旋转场景")
+    print("   - 滚轮：缩放画面")
+    print("   - 右键拖拽：平移场景")
+    print("   - 按 'q' 键关闭窗口")
     interactor.Start()
 
 # -------------------------- 主函数（纯面可视化流程） --------------------------
-if __name__ == '__main__':
+if __name__ == "__main__":
     # 1. 解析VRML（保留-1，提取面数据）
-    print('📥 正在解析VRML文件...')
+    print("📥 正在解析VRML文件...")
     parsed_data = parse_vrml_manual(VRML_FILE_PATH)
 
     if not parsed_data:
-        print('❌ 未提取到有效面数据！')
+        print("❌ 未提取到有效面数据！")
     else:
         total_segments = len(parsed_data)
-        total_faces = sum(len(seg['face_groups']) for seg in parsed_data)
-        total_points = sum(len(seg['points']) for seg in parsed_data)
-        print(f'✅ 成功解析 {total_segments} 个神经细丝段，{total_points} 个顶点，{total_faces} 个面，启动VTK面可视化...')
+        total_faces = sum(len(seg["face_groups"]) for seg in parsed_data)
+        total_points = sum(len(seg["points"]) for seg in parsed_data)
+        print(f"✅ 成功解析 {total_segments} 个神经细丝段，{total_points} 个顶点，{total_faces} 个面，启动VTK面可视化...")
         # 2. VTK绘制面（无其他功能）
-        vtk_face_visualization(parsed_data)`。</description><guid isPermaLink="true">https://conanan.github.io/post/draw%20wrl%20with%20vtk.html</guid><pubDate>Wed, 26 Nov 2025 14:03:31 +0000</pubDate></item><item><title>test</title><link>https://conanan.github.io/post/test.html</link><description>test。</description><guid isPermaLink="true">https://conanan.github.io/post/test.html</guid><pubDate>Wed, 26 Nov 2025 09:33:25 +0000</pubDate></item><item><title>Imaris wrl struct for dendrite annotaion</title><link>https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</link><description>
-***
-
-## **Annotated WRL Structure for FilamentSegment510000000001**
-
-```wrl
-DEF FilamentSegment510000000001   Group {
-  # This is the main container for one dendrite segment
-  # 'DEF' gives it a unique identifier (name)
-  # 'Group' means it can hold multiple children (sub-elements)
-  
-  children [
-    # List of child nodes under this segment
-    
-    DEF _4   Group {
-      # Empty group (placeholder)
-      # May be reserved for centerline, annotations, or future data
-    },
-    
-    DEF _5   Group {
-      # This group contains the visible 3D mesh (surface geometry)
-      
-      children
-        DEF _6   Shape {
-          # 'Shape' is the actual 3D object that gets rendered
-          # Contains appearance (color/material) and geometry (mesh)
-          
-          appearance
-            Appearance {
-              # Defines how the surface looks (color, shine, texture)
-              
-              material
-                Material {
-                  # Material properties for lighting and color
-                  
-                  diffuseColor 0.80000001 0 0.80000001
-                  # RGB color: (0.8, 0, 0.8) = Purple/Magenta
-                  # This typically identifies the dendrite shaft
-                  # (Spines are usually red: 1 0 0)
-                  
-                  specularColor 0.30000001 0.30000001 0.30000001
-                  # Specular (shininess) color: light gray
-                  # Controls how shiny/reflective the surface appears
-                }
-            }
-          
-          geometry
-            IndexedFaceSet {
-              # This defines the mesh surface as a collection of polygonal faces
-              # Each face is a flat panel connecting 3+ points
-              
-              coord
-                Coordinate {
-                  # Container for all 3D vertex positions
-                  
-                  point [ 10.075352 16.53404 7.1640425, ... ]
-                  # List of all (x, y, z) coordinates
-                  # Each triplet is one vertex in 3D space
-                  # For a tube/dendrite: points are arranged in rings (cross-sections)
-                  # These coordinates define the exact shape and position
-                }
-              
-              texCoord ...
-              # Texture coordinates (for applying images/patterns to surface)
-              # Not needed for morphometric measurements
-              
-              normal ...
-              # Surface normal vectors (for lighting calculations)
-              # Each normal points perpendicular to the surface at each vertex
-              # Used for realistic shading
-              
-              coordIndex [ 0, 1, 18, 17, -1, 1, 2, 19, 18, -1, ... ]
-              # THE KEY CONNECTIVITY ARRAY
-              # Defines which points form each face (polygon)
-              # Format: [point_a, point_b, point_c, point_d, -1, ...]
-              #   - Each group of indices (before -1) forms one face
-              #   - '-1' is a separator (end of face)
-              # Example: [0, 1, 18, 17, -1] connects points 0→1→18→17 into a quad
-              # For tubes: connects two neighboring rings to form surface panels
-              
-              normalIndex [ 0, 1, 18, 17, -1, 1, 2, 19, 18, -1, ... ]
-              # Same structure as coordIndex, but for normal vectors
-              # Parallel array for shading
-              
-              texCoordIndex [ 0, 1, 18, 17, -1, 1, 2, 19, 18, -1, ... ]
-              # Same structure, for texture mapping
-              # Parallel array for texture coordinates
-              
-              ccw TRUE
-              # 'Counter-clockwise' vertex ordering
-              # Determines which side of the face is 'front' (visible)
-              # TRUE = vertices listed in counter-clockwise order when viewed from outside
-              
-              solid FALSE
-              # FALSE = render both sides of each face
-              # (Not a 'solid' object—both inside and outside are visible)
-              
-              convex TRUE
-              # All faces are convex (no dents/concave parts)
-              # Optimization hint for renderer
-              
-              creaseAngle 0
-              # Shading smoothness threshold (in radians)
-              # 0 = sharp edges (flat shading between faces)
-              # Higher values = smooth shading across edges
-            }
-        }
-    },
-    
-    DEF _7   Group {
-      # Another empty group (reserved/unused)
-      # May hold metadata, labels, or future extensions
-    }
-  ]
-}
-```
-
-
-***
-
-## **Visual Breakdown**
-
-```
-FilamentSegment510000000001 (the dendrite segment container)
-│
-├─ _4 (empty placeholder group)
-│
-├─ _5 (group holding the 3D mesh)
-│   │
-│   └─ _6 (Shape = the visible surface)
-│       │
-│       ├─ Appearance
-│       │   └─ Material
-│       │       ├─ diffuseColor: 0.8 0 0.8 (purple = dendrite)
-│       │       └─ specularColor: 0.3 0.3 0.3 (shininess)
-│       │
-│       └─ IndexedFaceSet (the mesh geometry)
-│           ├─ Coordinate
-│           │   └─ point [ x y z, ... ]  ← ALL vertex positions
-│           ├─ coordIndex [ ... ]        ← HOW to connect vertices into faces
-│           ├─ normalIndex [ ... ]       ← Normals for shading
-│           ├─ texCoordIndex [ ... ]     ← Texture mapping
-│           └─ Rendering flags (ccw, solid, convex, creaseAngle)
-│
-└─ _7 (empty placeholder group)
-```
-
-
-。</description><guid isPermaLink="true">https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</guid><pubDate>Wed, 26 Nov 2025 09:20:38 +0000</pubDate></item></channel></rss>
+        vtk_face_visualization(parsed_data)`
