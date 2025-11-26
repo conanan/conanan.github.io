@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Blog Title</title><link>https://conanan.github.io</link><description>Blog description</description><copyright>Blog Title</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://conanan.github.io</link></image><lastBuildDate>Wed, 26 Nov 2025 09:50:22 +0000</lastBuildDate><managingEditor>Blog Title</managingEditor><ttl>60</ttl><webMaster>Blog Title</webMaster><item><title>test</title><link>https://conanan.github.io/post/test.html</link><description>test。</description><guid isPermaLink="true">https://conanan.github.io/post/test.html</guid><pubDate>Wed, 26 Nov 2025 09:33:25 +0000</pubDate></item><item><title>Imaris wrl struct for dendrite annotaion</title><link>https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</link><description>
+
 ***
 
 ## **Annotated WRL Structure for FilamentSegment510000000001**
@@ -7,8 +6,8 @@
 ```wrl
 DEF FilamentSegment510000000001   Group {
   # This is the main container for one dendrite segment
-  # 'DEF' gives it a unique identifier (name)
-  # 'Group' means it can hold multiple children (sub-elements)
+  # "DEF" gives it a unique identifier (name)
+  # "Group" means it can hold multiple children (sub-elements)
   
   children [
     # List of child nodes under this segment
@@ -23,7 +22,7 @@ DEF FilamentSegment510000000001   Group {
       
       children
         DEF _6   Shape {
-          # 'Shape' is the actual 3D object that gets rendered
+          # "Shape" is the actual 3D object that gets rendered
           # Contains appearance (color/material) and geometry (mesh)
           
           appearance
@@ -75,7 +74,7 @@ DEF FilamentSegment510000000001   Group {
               # Defines which points form each face (polygon)
               # Format: [point_a, point_b, point_c, point_d, -1, ...]
               #   - Each group of indices (before -1) forms one face
-              #   - '-1' is a separator (end of face)
+              #   - "-1" is a separator (end of face)
               # Example: [0, 1, 18, 17, -1] connects points 0→1→18→17 into a quad
               # For tubes: connects two neighboring rings to form surface panels
               
@@ -88,13 +87,13 @@ DEF FilamentSegment510000000001   Group {
               # Parallel array for texture coordinates
               
               ccw TRUE
-              # 'Counter-clockwise' vertex ordering
-              # Determines which side of the face is 'front' (visible)
+              # "Counter-clockwise" vertex ordering
+              # Determines which side of the face is "front" (visible)
               # TRUE = vertices listed in counter-clockwise order when viewed from outside
               
               solid FALSE
               # FALSE = render both sides of each face
-              # (Not a 'solid' object—both inside and outside are visible)
+              # (Not a "solid" object—both inside and outside are visible)
               
               convex TRUE
               # All faces are convex (no dents/concave parts)
@@ -147,4 +146,3 @@ FilamentSegment510000000001 (the dendrite segment container)
 ```
 
 
-。</description><guid isPermaLink="true">https://conanan.github.io/post/Imaris%20wrl%20struct%20for%20dendrite%20annotaion.html</guid><pubDate>Wed, 26 Nov 2025 09:20:38 +0000</pubDate></item></channel></rss>
