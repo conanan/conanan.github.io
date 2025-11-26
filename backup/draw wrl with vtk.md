@@ -382,9 +382,15 @@ if __name__ == "__main__":
         print(f"✅ 共解析到 {len(parsed_data)} 个FilamentSegment")
         export_first_segment_features(parsed_data)
     else:
-        print("❌ 解析失败：未找到符合要求的FilamentSegment结构！")```
+        print("❌ 解析失败：未找到符合要求的FilamentSegment结构！")
+```
+
+
 # faces
-```import vtk
+
+
+```
+import vtk
 import re
 import numpy as np
 
@@ -552,4 +558,5 @@ if __name__ == "__main__":
         total_points = sum(len(seg["points"]) for seg in parsed_data)
         print(f"✅ 成功解析 {total_segments} 个神经细丝段，{total_points} 个顶点，{total_faces} 个面，启动VTK面可视化...")
         # 2. VTK绘制面（无其他功能）
-        vtk_face_visualization(parsed_data)```
+        vtk_face_visualization(parsed_data)
+```
