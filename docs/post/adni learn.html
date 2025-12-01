@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# ADNI 研究相关说明
+
+
+* ADNI（阿尔茨海默病神经影像倡议）研究自 2004 年起持续开展，目前已划分为 5 个阶段，分别是 ADNI1、ADNIGO、ADNI2、ADNI3 和 ADNI4。">
+<meta property="og:title" content="adni learn">
+<meta property="og:description" content="# ADNI 研究相关说明
+
+
+* ADNI（阿尔茨海默病神经影像倡议）研究自 2004 年起持续开展，目前已划分为 5 个阶段，分别是 ADNI1、ADNIGO、ADNI2、ADNI3 和 ADNI4。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://conanan.github.io/post/adni%20learn.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>adni learn</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">adni learn</h1>
+<div class="title-right">
+    <a href="https://conanan.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/conanan/conanan.github.io/issues/7" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>ADNI 研究相关说明</h1>
+<ul>
+<li>
+<p>ADNI（阿尔茨海默病神经影像倡议）研究自 2004 年起持续开展，目前已划分为 5 个阶段，分别是 ADNI1、ADNIGO、ADNI2、ADNI3 和 ADNI4。当前正依据 ADNI4 方案进行数据收集。需注意，不同阶段的影像检查方案、临床测量方法以及数据的组织与格式可能存在差异。</p>
+</li>
+<li>
+<p>脑影像数据（包括 MRI [磁共振成像]、PET [正电子发射断层扫描]、病理切片）可通过 “Search and Download → Advanced Image Search” 路径查找。</p>
+</li>
+<li>
+<p>.csv 格式的表格数据可通过 “Study Files listings” 下载。登录 IDA（ADNI 数据访问平台）后，上述两类数据均可在顶部菜单栏的 “Search and Download” 标签页中找到。以下列出部分关键表格在该界面中的具体位置：</p>
+<ul>
+<li>
+<p>数据字典：Study Files → START HERE → Quick Start → Data dictionary</p>
+</li>
+<li>
+<p>诊断信息：Study Files → Assessments → Diagnosis → Diagnostic Summary</p>
+</li>
+<li>
+<p>人口统计学数据（含种族、性别等）：Study Files → Subject Characteristics → Subject Demographics → Subject Demographics</p>
+</li>
+<li>
+<p>ApoE4 基因分型数据：Study Files → Biospecimen → Biospecimen Results → ApoE Genotyping – Results</p>
+</li>
+<li>
+<p>认知评估数据：Study Files → Assessments → Neuropsychological</p>
+</li>
+<li>
+<p>MRI 测量数据：Study Files → Imaging → MR Image Analysis</p>
+</li>
+<li>
+<p>PET 测量数据：Study Files → Imaging → PET Image Analysis</p>
+</li>
+<li>
+<p>生物体液测量数据：Biospecimen → Biospecimen Results</p>
+</li>
+</ul>
+</li>
+<li>
+<p>数据集中使用的主要参与者标识为 PTID（格式为 XXX_S_XXXXX）和 RID。其中，RID 由 PTID 的末尾数字构成，且需去除数字前的所有前导零（例如，若 PTID 为 037_S_4410，对应的 RID 则为 4410）。</p>
+</li>
+<li>
+<p>在纵向分析中，应使用 VISDATE（访视日期）、EXAMDATE（检查日期）或 SCANDATE（扫描日期）字段确定时间维度（即不同时间点数据的关联）。</p>
+</li>
+<li>
+<p>需注意，对于 MRI、PET 和生物体液的数值型测量结果，每个.csv 文件均配有对应的.pdf 文档，该文档会详细说明各项测量所采用的具体方法。</p>
+</li>
+</ul>
+<h1>diagnosis</h1>
+<h1>ADNI1 诊断数据字段及含义</h1>
+<h2>一、标识类字段（参与者 / 访视 / 时间）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHASE</td>
+<td>研究阶段；需通过 PTID 关联基因数据的 ADNIGO/ADNI2 阶段样本</td>
+<td>PTID</td>
+<td>参与者唯一标识，格式为 “XXX_S_XXXXX”；对应基因数据 SubjectID，是跨数据整合核心键</td>
+<td>RID</td>
+<td>参与者简化标识，由 PTID 末尾数字去除前导零构成；ADNI 官方 ID 规则，可作为 PTID 的备份关联键</td>
+</tr>
+<tr>
+<td>VISCODE</td>
+<td>访视代码（如 “bl” 代表基线访视）；对应基因数据 Visit 字段，确保诊断与基因检测同期</td>
+<td>VISCODE2</td>
+<td>访视补充代码；特殊访视调整时使用，无特殊情况与 VISCODE 一致</td>
+<td>EXAMDATE</td>
+<td>诊断检查日期，格式为 “月 / 日 / 年”；纵向分析核心时间字段，用于匹配同期基因数据 YearofCollection，避免跨时间偏差</td>
+</tr>
+<tr>
+<td>USERDATE</td>
+<td>数据录入日期，格式为 “月 / 日 / 年”；用于追溯数据录入时间，确保数据时效性</td>
+<td>update_stamp</td>
+<td>数据最后更新时间，格式为 “月 / 日 / 年 时：分”；用于确认数据最新状态，避免使用过期数据</td>
+<td>USERDATE2</td>
+<td>数据录入补充日期；无特殊含义，未使用时为空</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>二、诊断核心类字段（分组 / 确认 / 严重程度）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DIAGNOSIS</td>
+<td>核心诊断结果，编码规则：1 = 认知正常（CU）、2 = 轻度认知障碍（MCI）、3 = 阿尔茨海默病（AD）、-4 = 数据缺失 / 未适用</td>
+<td>DXNORM</td>
+<td>认知正常确认字段，仅当 DIAGNOSIS=1 时有效；编码规则：1 = 确认认知正常、-4 = 非正常组无需填写</td>
+<td>DX MCI</td>
+<td>MCI 确认字段，仅当 DIAGNOSIS=2 时有效；编码规则：1 = 确认 MCI、-4 = 非 MCI 组无需填写</td>
+</tr>
+<tr>
+<td>DXAD</td>
+<td>AD 确认字段，仅当 DIAGNOSIS=3 时有效；编码规则：1 = 确认 AD、-4 = 非 AD 组无需填写</td>
+<td>DXDSEV</td>
+<td>AD 严重程度字段，仅当 DIAGNOSIS=3 时有效；编码规则：1 = 轻度 AD、2 = 中度 AD、-4 = 非 AD 组无需填写</td>
+<td>DXAPP</td>
+<td>AD 可能诊断字段，仅当 DIAGNOSIS=3 时有效；编码规则：1 = 可能 AD、3 = 很可能 AD、-4 = 非 AD 组无需填写</td>
+</tr>
+<tr>
+<td>DXMPTR1~DXMPTR6</td>
+<td>MCI 诊断依据字段（共 6 个，对应不同诊断指标）；编码规则：1 = 符合该指标、2 = 不符合该指标、-4 = 非 MCI 组无需填写</td>
+<td>DXMDES</td>
+<td>MCI 亚型描述字段；编码规则：1 = 遗忘型 MCI、2 = 非遗忘型 MCI、-4 = 非 MCI 组无需填写</td>
+<td>DXMDUE</td>
+<td>MCI 病因说明字段；编码规则：1 = 退行性、2 = 血管性、3 = 混合性、-4 = 非 MCI 组无需填写</td>
+</tr>
+<tr>
+<td>DXMOTHET</td>
+<td>MCI 其他病因字段；编码规则：1 = 存在其他病因、-4 = 无其他病因 / 非 MCI 组无需填写</td>
+<td>DXDDUE</td>
+<td>AD 病因说明字段；编码规则：1 = 退行性、2 = 血管性、3 = 混合性、-4 = 非 AD 组无需填写</td>
+<td>DXAPOSS</td>
+<td>AD 可能性补充字段；编码规则：1 = 符合可能性标准、-4 = 非 AD 组无需填写</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>三、辅助类字段（合并症 / 质控 / 中心）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DXPARK</td>
+<td>合并帕金森病（PD）字段；编码规则：1 = 合并 PD、-4 = 未合并 PD / 未评估</td>
+<td>DXPDES</td>
+<td>PD 描述字段；编码规则：1 = 典型 PD、2 = 非典型 PD、-4 = 无 PD / 未评估</td>
+<td>DXPCOG</td>
+<td>PD 认知障碍字段；编码规则：1 = 存在 PD 认知障碍、-4 = 无 PD / 无认知障碍</td>
+</tr>
+<tr>
+<td>DXPATYP</td>
+<td>PD 非典型症状字段；编码规则：1 = 存在非典型症状、-4 = 无 PD / 无非典型症状</td>
+<td>DXDEP</td>
+<td>抑郁状态字段；编码规则：1 = 存在抑郁、-4 = 无抑郁 / 未评估</td>
+<td>DXNODEP</td>
+<td>无抑郁确认字段，仅当 DIAGNOSIS=1 时有效；编码规则：1 = 确认无抑郁、-4 = 非正常组无需填写</td>
+</tr>
+<tr>
+<td>DXOTHDEM</td>
+<td>其他痴呆类型字段；编码规则：1 = 存在其他痴呆、-4 = 无其他痴呆 / 未评估</td>
+<td>DXODES</td>
+<td>其他痴呆描述字段；编码规则：1 = 血管性痴呆、2 = 路易体痴呆等、-4 = 无其他痴呆 / 未评估</td>
+<td>DXCONFID</td>
+<td>诊断置信度字段；编码规则：1 = 低置信度、2 = 中置信度、3 = 较高置信度、4 = 高置信度</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>诊断记录唯一 ID；仅用于内部数据管理，无跨表关联意义</td>
+<td>SITEID</td>
+<td>数据采集中心 ID；用于排查 “中心效应”（不同中心检测差异），整合分析时可作为协变量控制</td>
+<td>HAS_QC_ERROR</td>
+<td>质量控制（QC）错误标记；编码规则：1 = 存在 QC 错误、0 = 无 QC 错误；未记录时为空，默认无错误</td>
+</tr>
+<tr>
+<td>DD_CRF_VERSION_LABEL</td>
+<td>CRF（病例报告表）版本标签；未指定时为空，代表使用默认版本 CRF</td>
+<td>LANGUAGE_CODE</td>
+<td>评估语言编码（如 1 = 英语、2 = 西班牙语等）；未指定时为空，代表使用默认语言</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h1></h1>
+<h1>ADNI1 参与者特征数据字段及含义</h1>
+<h2>一、标识类字段（参与者 / 访视 / 时间，含重叠与新增）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PHASE</td>
+<td>研究阶段，此处均为 “ADNI1”；与诊断 / 基因数据的 PHASE 字段一致，用于跨数据阶段匹配</td>
+<td>PTID</td>
+<td>参与者唯一标识（格式 XXX_S_XXXXX）；核心关联键，对应诊断数据 PTID、基因数据 SubjectID</td>
+<td>RID</td>
+<td>参与者简化标识（PTID 末尾去前导零）；ADNI 官方 ID 规则，备份关联键</td>
+</tr>
+<tr>
+<td>VISCODE</td>
+<td>访视代码（如 “sc”“f”，“sc” 可能代表 “筛查访视”，“f” 代表 “随访访视”）；对应诊断数据 VISCODE，确保参与者特征与诊断 / 基因数据同期</td>
+<td>VISCODE2</td>
+<td>访视补充代码；与 VISCODE 一致，无特殊调整时同步，用于确认访视类型</td>
+<td>VISDATE</td>
+<td>访视日期（格式 “月 / 日 / 年”）；新增时间字段，替代诊断数据 EXAMDATE，用于匹配同期样本的基因 / 影像数据，纵向分析核心依据</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>参与者特征记录唯一 ID；仅内部数据管理用，无跨表关联意义</td>
+<td>SITEID</td>
+<td>数据采集中心 ID；与诊断数据 SITEID 一致，用于排查 “中心效应”，整合分析时作协变量控制</td>
+<td>update_stamp</td>
+<td>数据最后更新时间（格式 “月 / 日 / 年 时：分”）；确保数据时效性，避免使用过期的参与者特征信息</td>
+</tr>
+<tr>
+<td>USERDATE</td>
+<td>数据录入日期（格式 “月 / 日 / 年”）；追溯特征数据录入时间，与 VISDATE 比对可验证数据一致性</td>
+<td>USERDATE2</td>
+<td>数据录入补充日期；未使用时为空，无实际含义</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>二、人口统计学类字段（新增核心特征）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PTSOURCE</td>
+<td>参与者来源标识；编码规则：1 = 社区招募、2 = 医院转诊等（ADNI 通用规则）；当前数据均为 1，代表社区招募</td>
+<td>PTGENDER</td>
+<td>性别；编码规则：1 = 男性、2 = 女性（ADNI 标准编码）；用于分析性别对 AD 发病 / 基因表达的影响</td>
+<td>PTDOB</td>
+<td>出生日期，格式 “月 - 年”（如 Apr-31）；需结合 PTDOBYY 确认完整日期（PTDOBYY 格式 “1/1 / 年”），用于计算参与者入组年龄（AD 风险与年龄强相关）</td>
+</tr>
+<tr>
+<td>PTDOBYY</td>
+<td>出生日期（完整格式 “1/1 / 年”）；补充 PTDOB 的年份信息，核心用途是年龄计算（如 1/1/1931 代表 1931 年出生）</td>
+<td>PTHAND</td>
+<td>惯用手；编码规则：1 = 右手、2 = 左手、-4 = 未记录；用于排除 “惯用手” 对认知评估（如 ADAS 指令执行）的干扰</td>
+<td>PTMARRY</td>
+<td>婚姻状况；编码规则：1 = 已婚 / 同居、2 = 离异 / 分居、3 = 丧偶、4 = 未婚、-4 = 未记录；当前数据多为 1，代表已婚 / 同居</td>
+</tr>
+<tr>
+<td>PTEDUCAT</td>
+<td>教育年限（单位：年）；用于调整 “教育水平” 对认知评分的影响（高教育可能抵消部分 AD 认知损伤）；常见范围 6-20 年</td>
+<td>PTWORKHS</td>
+<td>是否完成高中教育；编码规则：1 = 是、0 = 否、-4 = 未记录；补充 PTEDUCAT 的教育程度信息，部分样本为 - 4（未记录）</td>
+<td>PTWORK</td>
+<td>工作状态；编码规则：1 = 在职、2 = 退休、3 = 失业、-4 = 未记录；当前数据多为空 /-4，未详细记录</td>
+</tr>
+<tr>
+<td>PTNOTRT</td>
+<td>是否有职业治疗史；编码规则：1 = 有、0 = 无、-4 = 未记录；用于排查 “职业治疗” 对认知功能的干预影响</td>
+<td>PTRTYR</td>
+<td>职业治疗开始年份；仅当 PTNOTRT=1 时有效，格式为 4 位年份（如 1989）；未治疗样本为空 /-4</td>
+<td>PTHOME</td>
+<td>居住状态；编码规则：1 = 独居、2 = 与家人同住、3 = 养老院、-4 = 未记录；当前数据多为 1/3，代表独居或养老院居住</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>三、语言能力类字段（新增，关联认知评估）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PTTLANG</td>
+<td>掌握语言总数；编码规则：1=1 种语言、2=2 种语言、3=3 种及以上、-4 = 未记录；用于调整 “语言数量” 对神经心理学评估（如 ADAS 语言测试）的影响</td>
+<td>PTPLANG</td>
+<td>主要使用语言；编码规则：1 = 英语、2 = 西班牙语、3 = 其他语言、-4 = 未记录；当前数据多为 1/2，代表英语或西班牙语为主要语言</td>
+<td>PTADBEG</td>
+<td>语言障碍开始年龄；仅当存在语言障碍时记录，格式为数字（如 5 代表 5 岁）；未记录 / 无障碍样本为空 /-4</td>
+</tr>
+<tr>
+<td>PTCOGBEG</td>
+<td>认知障碍开始年龄；仅当存在认知障碍时记录，格式为数字（如 70 代表 70 岁）；未记录 / 无障碍样本为空 /-4；与诊断数据 DIAGNOSIS 关联（AD/MCI 样本可能有记录）</td>
+<td>PTENGSPK</td>
+<td>是否会说英语；编码规则：1 = 会、2 = 不会、-4 = 未记录；当前数据多为 1，代表会说英语</td>
+<td>PTNLANG</td>
+<td>母语；编码规则：1 = 英语、2 = 西班牙语、3 = 其他、-4 = 未记录；补充 PTPLANG 的母语信息，避免 “主要语言≠母语” 对评估的干扰</td>
+</tr>
+<tr>
+<td>PTENGSPKAGE</td>
+<td>开始说英语的年龄；仅当 PTENGSPK=1 且母语非英语时记录，格式为数字（如 10 代表 10 岁）；母语为英语样本为空 /-4</td>
+<td>PTCLANG</td>
+<td>认知评估使用的语言；编码规则：1 = 英语、2 = 西班牙语、-4 = 未记录；需与 ADAS 评估语言一致，否则可能影响认知评分准确性</td>
+<td>PTLANGSP</td>
+<td>口语能力；编码规则：1 = 正常、2 = 轻度障碍、3 = 中度障碍、4 = 重度障碍、-4 = 未评估；用于验证认知评估中 “语言表达” 相关得分的可靠性</td>
+</tr>
+<tr>
+<td>PTLANGWR</td>
+<td>书写能力；编码规则同 PTLANGSP；与口语能力共同反映语言功能完整性，AD 患者常出现语言能力下降</td>
+<td>PTSPTIM</td>
+<td>每日说话时长（单位：小时）；用于分析 “语言使用频率” 对认知保留的影响；未记录样本为空 /-4</td>
+<td>PTSPOTTIM</td>
+<td>每日口语练习时长（单位：小时）；补充 PTSPTIM 的语言训练信息，部分样本为空 /-4</td>
+</tr>
+<tr>
+<td>PTLANGPR1~PTLANGPR6</td>
+<td>第 1-6 种语言的 “听说读写” 能力评分（PTLANGPR = 理解、PTLANGSP = 说话、PTLANGRD = 阅读、PTLANGWR = 书写、PTLANGUN = 使用频率）；编码规则：1 = 正常、2 = 轻度障碍、3 = 中度障碍、4 = 重度障碍、-4 = 无该语言能力；仅记录参与者掌握的语言</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>四、出生地与移民类字段（新增，辅助人群分层）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PTETHCAT</td>
+<td>种族 / 民族分类；ADNI 通用编码：1 = 白人、2 = 黑人、3 = 亚裔、4 = 美洲原住民、5 = 其他、-4 = 未记录；当前数据多为 2/5，代表特定种族群体</td>
+<td>PTRACCAT</td>
+<td>种族细分；编码规则需结合 ADNI 数据字典（如 2 = 非裔美国人、5 = 混血等）；补充 PTETHCAT 的种族细节，用于分析种族对 AD 风险的影响</td>
+<td>PTIDENT</td>
+<td>身份认同（如自我报告种族）；编码规则同 PTRACCAT；与 PTETHCAT/PTRACCAT 共同确保种族分类一致性</td>
+</tr>
+<tr>
+<td>PTORIENT</td>
+<td>文化取向；编码规则：1 = 西方文化、2 = 东方文化、3 = 其他、-4 = 未记录；用于排除 “文化差异” 对认知评估（如 ADAS 中的文化相关测试）的干扰</td>
+<td>PTORIENTOT</td>
+<td>其他文化取向说明；仅当 PTORIENT=3 时填写具体内容；未选 “其他” 样本为空 /-4</td>
+<td>PTBORN</td>
+<td>是否在美国出生；编码规则：1 = 是、2 = 否、-4 = 未记录；用于区分 “本土 / 移民” 人群，分析移民状态对 AD 的影响</td>
+</tr>
+<tr>
+<td>PTBIRPL</td>
+<td>出生地（国家 / 地区）；仅当 PTBORN=2 时填写具体名称（如中国、墨西哥等）；美国出生样本为空 /-4</td>
+<td>PTIMMAGE</td>
+<td>移民年龄；仅当 PTBORN=2 时记录（格式为数字，如 20 代表 20 岁移民）；本土出生样本为空 /-4；用于分析 “移民年龄” 对认知功能的长期影响</td>
+<td>PTIMMWHY</td>
+<td>移民原因；编码规则：1 = 工作、2 = 家庭、3 = 教育、4 = 其他、-4 = 未记录；仅移民样本填写，本土样本为空 /-4</td>
+</tr>
+<tr>
+<td>PTBIRPR</td>
+<td>出生地省份 / 州；补充 PTBIRPL 的地理细节（如加州、广东省等）；未记录样本为空 /-4</td>
+<td>PTBIRGR</td>
+<td>出生地城市；补充 PTBIRPR 的地理细节；未记录样本为空 /-4；与 PTBIRPL/PTBIRPR 共同构成完整出生地信息，用于环境因素分析</td>
+<td>PTETHCATH</td>
+<td>种族 / 民族细分（可能为 PTETHCAT 的补充字段）；编码规则同 PTETHCAT；未记录样本为空 /-4</td>
+</tr>
+<tr>
+<td>PTASIAN</td>
+<td>是否为亚裔；编码规则：1 = 是、0 = 否、-4 = 未记录；补充 PTETHCAT 的亚裔细分，避免种族分类混淆</td>
+<td>PTOPI</td>
+<td>是否为大洋洲原住民；编码规则同 PTASIAN；补充 PTETHCAT 的大洋洲种族细分，当前数据多为空 /-4</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>五、辅助类字段（质控 / 版本，与诊断数据一致）</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+<th>字段名</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD_CRF_VERSION_LABEL</td>
+<td>CRF（病例报告表）版本标签；未指定时为空，代表使用默认版本 CRF；与诊断数据字段一致，确保数据采集标准统一</td>
+<td>LANGUAGE_CODE</td>
+<td>评估语言编码（如 1 = 英语、2 = 西班牙语）；未指定时为空，代表使用默认语言；需与 PTCLANG（认知评估语言）一致，避免语言偏差</td>
+<td>HAS_QC_ERROR</td>
+<td>质量控制（QC）错误标记；编码规则：1 = 存在 QC 错误、0 = 无 QC 错误；未记录时为空，默认无错误；与诊断数据字段一致，确保数据可靠性</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://conanan.github.io">conan Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","conanan/conanan.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
